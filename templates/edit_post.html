@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="content">
+    <h1>Редактировать пост</h1>
+    <form id="editForm" method="POST" action="{{ url_for('app.edit_post', post_id=post.id) }}" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+        <div class="form-group">
+            <label for="title">Заголовок:</label>
+            {{ form.title }}
+        </div>
+        <div class="form-group">
+            <label for="content">Содержимое:</label>
+            {{ form.content }}
+        </div>
+        {% if post.image %}
+        <div class="form-group">
+            <label for="current_image">Текущее изображение:</label><br>
+            <img src="{{ url_for('static', filename='post_pics/' + post.image) }}" alt="Current Image" style="width: 300px; height: auto;">
+        </div>
+        {% endif %}
+        <div class="form-group">
+            <label for="image">Выберите файл:</label>
+            {{ form.image }}
+        </div>
+        <div class="form-group">
+            {{ form.submit(class="btn btn-primary") }}
+        </div>
+    </form>
+</div>
+{% endblock %}

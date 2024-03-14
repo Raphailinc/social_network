@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h1>Все посты</h1>
+    <form action="{{ url_for('app.all_posts') }}" method="GET" class="form-inline mb-3">
+        <input type="text" name="search" class="form-control mr-sm-2" placeholder="Поиск">
+        <button type="submit" class="btn btn-primary">Найти</button>
+    </form>
+    {% for post_with_profile in all_posts_with_profile.items %}
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{ post_with_profile.title }}</h5>
+                <p class="card-text">{{ post_with_profile.content }}</p>
+                {% if post_with_profile.image %}
+                    <img src="{{ url_for('static', filename='post_pics/' + post_with_profile.image) }}" alt="Post Image" class="post-image" style="width: 300px; height: auto;">
+                {% endif %}
+                <p class="card-text">Автор: {{ post_with_profile.user.username }}</p>
+                <div class="user-profile-picture-container">
+                    {% if post_with_profile.user.profile_image %}
+                        <img src="{{ url_for('static', filename='profile_pics/' + post_with_profile.user.profile_image) }}" alt="User Profile Picture" class="user-profile-picture">
+                    {% else %}
+                        <img src="{{ url_for('static', filename='default_profile_picture.jpg') }}" alt="Default Profile Picture" class="user-profile-picture">
+                    {% endif %}
+                </div>
+                {% if current_user.is_authenticated and post_with_profile.user.id == current_user.id %}
+                    <a href="{{ url_for('app.edit_post', post_id=post_with_profile.id) }}" class="btn btn-primary">Редактировать</a>
+                    <form action="{{ url_for('app.delete_post', post_id=post_with_profile.id) }}" method="post" style="display: inline-block;">
+                        <button type="submit" class="btn btn-danger">Удалить</button>
+                    </form>
+                {% endif %}
+                <a href="{{ url_for('app.view_post', post_id=post_with_profile.id) }}" class="btn btn-primary">Комментарии</a>
+            </div>
+        </div>
+    {% endfor %}
+    <div class="pagination">
+        {% if all_posts_with_profile.has_prev %}
+            <a href="{{ url_for('app.all_posts', page=all_posts_with_profile.prev_num) }}">Previous</a>
+        {% endif %}
+        {% for page_num in all_posts_with_profile.iter_pages() %}
+            {% if page_num %}
+                {% if page_num != all_posts_with_profile.page %}
+                    <a href="{{ url_for('app.all_posts', page=page_num) }}">{{ page_num }}</a>
+                {% else %}
+                    <span>{{ page_num }}</span>
+                {% endif %}
+            {% else %}
+                ...
+            {% endif %}
+        {% endfor %}
+        {% if all_posts_with_profile.has_next %}
+            <a href="{{ url_for('app.all_posts', page=all_posts_with_profile.next_num) }}">Next</a>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

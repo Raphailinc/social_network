@@ -1,0 +1,19 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Logs
+*.log
+
+# Environment
+.env
+venv/
+.env.*
+
+# Database
+database.db
+test.db
+
+# Local development configuration
+instance/

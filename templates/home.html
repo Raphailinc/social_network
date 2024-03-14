@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="container">
+    {% if current_user.is_authenticated %}
+      <div class="jumbotron">
+        <h1 class="display-4">Добро пожаловать, {{ current_user.username }}!</h1>
+        <p class="lead">Это ваш блог. Начните новое обсуждение или присоединитесь к существующим.</p>
+        <hr class="my-4">
+        <p>Делитесь своим опытом и идеями.</p>
+        <a class="btn btn-primary btn-lg" href="{{ url_for('app.create_post') }}" role="button">Создать пост</a>
+        <a class="btn btn-primary btn-lg" href="{{ url_for('app.all_posts') }}" role="button">Просмотреть все посты</a>
+      </div>
+    {% else %}
+      <div class="jumbotron">
+        <h1 class="display-4">Добро пожаловать в блог!</h1>
+        <p class="lead">Здесь вы можете делиться своими мыслями и идеями.</p>
+        <hr class="my-4">
+        <p>Присоединяйтесь к нашему сообществу и начинайте обсуждение.</p>
+        <a class="btn btn-primary btn-lg" href="{{ url_for('app.login') }}" role="button">Войти</a>
+        <a class="btn btn-primary btn-lg" href="{{ url_for('app.register') }}" role="button">Зарегистрироваться</a>
+      </div>
+    {% endif %}
+  </div>
+{% endblock %}
