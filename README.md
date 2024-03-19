@@ -16,7 +16,7 @@ git clone https://github.com/velikiykeamil/social_network.git
 cd social-network
 ```
 
-3. Установите и поделючите виртуальное окружение:
+3. Установите и подключите виртуальное окружение:
 
 ```bash
 virtualenv venv
