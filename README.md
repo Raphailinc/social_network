@@ -20,7 +20,9 @@ cd social-network
 
 ```bash
 virtualenv venv
+```
 
+```bash
 source venv/bin/activate
 ```
 
