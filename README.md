@@ -13,10 +13,18 @@ git clone https://github.com/velikiykeamil/social_network.git
 2. Перейдите в каталог проекта:
 
 ```bash
-cd blog
+cd social-network
 ```
 
-3. Установите зависимости:
+3. Установите и поделючите виртуальное окружение:
+
+```bash
+virtualenv venv
+
+source venv/bin/activate
+```
+
+4. Установите зависимости:
 
 ```bash
 pip install -r requirements.txt
@@ -56,8 +64,4 @@ python manage.py
 
 ## Автор
 
-Keamil - velikiykeamil@mail.ru
-
-## Лицензия
-
-Этот проект лицензируется в соответствии с лицензией [MIT License](https://opensource.org/licenses/MIT).
+[Keamil](https://github.com/Raphailinc)
